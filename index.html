@@ -1,0 +1,1090 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How do I make the f&amp;*@-ing robot move??</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="771421e6-4334-48a1-ab39-703ef40e0fec" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="How%20do%20I%20make%20the%20f&amp;%20@-ing%20robot%20move%200d698b4cf64e4306b31bd9506dd2eca5/19267233.png"/></div><h1 class="page-title">How do I make the f&amp;*@-ing robot move??</h1></header><div class="page-body"><h3 id="0a31aaa7-bf14-4518-b8c0-cceb1787fc04" class="block-color-red"><em><span style="border-bottom:0.05em solid"><strong>If you’re lucky enough to have written code from this guide that compiles, make sure that your robot is in a position where it will not hurt anyone if something goes wrong when you run it. I am not responsible for any damaged persons or property.</strong></span></em></h3><p id="ade0fe23-d9e9-4eb3-8540-d1b5ee66c9fa" class=""><strong><mark class="highlight-red">Red</mark></strong><mark class="highlight-red"> </mark>indicates a note to myself or unfinished section. Apologies for sharing this guide prematurely :)</p><ul id="4755aaca-d5d9-4e37-b059-0ce15cdbd26d" class="toggle"><li><details open=""><summary>←this triangle indicates that there is a dropdown revealing more text. Click it to reveal what is hidden, click again to hide it.</summary><h1 id="d470e6f1-4d86-4d54-aa64-188c10455098" class=""><mark class="highlight-pink"><span style="border-bottom:0.05em solid"><em><strong>Hello. I am hidden text.</strong></em></span></mark></h1></details></li></ul><h1 id="5ab6dbb9-5990-4006-99d0-78ae91078d9c" class="">Before we get to that we need to cover some background info...</h1><h2 id="f768ee15-cf50-46a6-95e4-886220b7e107" class="">What is a “Black Box”</h2><p id="5f3fced7-0e9a-4002-b13f-3ba33be9f4f6" class="">“Black Box” <span style="border-bottom:0.05em solid">is not a technical term</span>. It is a way of referring to some abstract thing whose task is known, but the way that it has been designed internally is unknown. </p><p id="91d262fb-4879-411e-ac2c-9b0b223f31a0" class="">You treat a car like a “black box” as well. When you drive a car you are never aware of what is happening on the inside from gears shifting to the engine turning to the... well I actually don’t know what else, because I’ve never built a car. Although you don’t know what is happening on the inside, you know there are certain rules that need to be followed. </p><ul id="100f5da1-e3d7-4e38-b3ff-3edb212deaa8" class="bulleted-list"><li style="list-style-type:disc">You can’t drive your car from the passenger seat or from the back seat.</li></ul><ul id="0da8a394-689b-40d2-a2e8-edf271af0439" class="bulleted-list"><li style="list-style-type:disc">You cant move forward until you turn the key in the ignition</li></ul><ul id="7f38d715-2d87-4c4e-8544-cc671d6cf4e5" class="bulleted-list"><li style="list-style-type:disc">To “move forward” you need to press the gas pedal</li></ul><ul id="0efe6a81-34e3-4a4b-a12f-bb4453d71b5a" class="bulleted-list"><li style="list-style-type:disc">To “stop” you need to press the brake pedal</li></ul><p id="29882764-d536-4bdc-b9ff-6cefa441311d" class="">At no point while driving the car are you thinking about the brake pads clamping onto the wheels or the operation of your fuel injector. You only interact with the car in terms of the operations “start”, “stop”, “turn”, “park”, etc. Expert car users may also know about “signaling”!</p><div id="4abd7cec-b0b7-4561-98d1-ef1d1459eeee" class="column-list"><div id="5dccec8c-d38b-4c8f-822a-d64c1c29e0f6" style="width:50%" class="column"><p id="30cffd39-cb7e-4b09-ad25-a81632219422" class="">Let’s use another example so that you might be able to see how it relates to writing our code. Consider for example, a black box whose task is to add two numbers together. We know that it takes two numbers as input, and that it returns the sum as output, but we don’t know the exact way that it does this. Maybe this box sends instructions to our CPU to add the numbers together or maybe there is an elf inside the box who sees the numbers and quickly computes the sum with an abacus. The point is, we don’t need to know right now. Someone figured it out for us and now we can use it to write our programs as long as we provide it two numbers that can be added.</p><p id="c3ca7ba1-500e-496b-81ff-8f9a95216f02" class="">In order to create and maintain BIG systems, we need to allow for some (even most) details to be ignored.</p></div><div id="429e750b-c9e8-41fc-8c5d-b8ddb4d2bca1" style="width:50%" class="column"><pre id="bebdc9ec-f4ca-45c0-981b-848320e0573f" class="code"><code>/*
+ *             ┌─────────┐
+ * 30─────────►│    ?    │
+ *             │  Black  ├────────►53
+ *             │   Box   │
+ * 23─────────►│    ?    │
+ *             └─────────┘
+ */</code></pre></div></div><p id="241b177c-4f66-4d1d-9ba6-3c8f59272661" class="">When writing the instructions for this robot we will use some “black boxes” that have been created for us and we will also use some that we create ourselves. By doing this we keep our code organized and easy to understand.</p><h2 id="803dd03b-0de0-4033-9e76-45036c9e166d" class="">What is a “Class”?</h2><p id="7ae07929-2376-486e-af19-d5fc2fd2f11f" class="">Sometimes a thing that you are writing code for gets too big for one file. It becomes so big that it is no longer reasonable for ONE person, even its creator, to know exactly what every single line of code does in the program. </p><p id="28c43180-8ad6-4671-a1c0-bda9b7a3d26c" class="">This is where classes become useful. Instead of having a giant soup of code, we will divide the code up into <span style="border-bottom:0.05em solid">groups of variables and functions</span> that act as “<strong>black boxes</strong>” in our system. Once we divide the code into these sections, all that the programmer will need to know is what each of these boxes can do in general, and what its role is in the overall system.</p><p id="508d1aea-8c2e-483e-a3ac-061e0621f02c" class="">Bottom line: a class is just a way of dividing code into groups of variables and functions. By using them, we make our code organized and easy to use.</p><h3 id="807eef90-d8f7-4048-b2ad-6fcefb667965" class=""><span style="border-bottom:0.05em solid"><em><strong><mark class="highlight-teal">I HIGHLY RECOMMEND</mark></strong></em></span> that you use<mark class="highlight-blue"> </mark><mark class="highlight-blue"><a href="https://www.codecademy.com/learn/learn-java">Codecademy</a></mark><mark class="highlight-blue"> </mark>to become familiar with the <em><span style="border-bottom:0.05em solid">syntax of Java</span></em> and the <em><span style="border-bottom:0.05em solid">concept of a class</span></em> before moving forward. You will only need to complete <span style="border-bottom:0.05em solid">sections 1-3</span>. I will not be covering the basics of working with classes and the syntax of Java here, because I don’t think I would be able to write anything here that is better than learning by following their exercises.</h3><p id="e522fae5-ad04-4557-b6cb-a124e39b5aac" class="">Additionally, <mark class="highlight-blue"><a href="https://www.w3schools.com/java/java_oop.asp">the first 9 sections of W3schools tutorials on Java Classes</a></mark> do a great job going further in depth if you would like additional support.</p><h1 id="900ff8a8-b66d-4b42-a942-9a8899d4e9ec" class="">The WPI Library</h1><p id="1f84a79b-c924-4062-9246-154b458151f0" class="">Let’s remember what our main goal is. We want to connect our inputs with some kind of real mechanical motion/action in the robot. Right now this is our understanding of the system in terms of “black boxes”. It might not seem that useful to draw out our understanding at this point, but I think this helps to frame the problem that the WPI Library solves.</p><pre id="eceb0a25-159a-4269-bc40-c1363812c980" class="code"><code>/*
+ *                          ┌─────────────────────────────┐
+ *                          │                             │
+ *                          │                             ├───►Motor Movement
+ * Xbox Controller─────────►│                             │
+ *                          │                             ├───►Actuator Movement
+ * Button──────────────────►│                             │
+ *                          │             ???             ├───►Cargo Gate Opening/Closing
+ * Autonomous Routine──────►│                             │
+ *                          │                             │
+ * On-Screen Buttons───────►│                             │
+ *                          │                             │
+ *                          │                             │
+ *                          └─────────────────────────────┘
+ */</code></pre><p id="87fc280e-89b2-4241-a88e-9614d370b2a2" class="">This is a diagram of the system we will build in this guide. This collection of classes will be used to drive the robot forward at a <span style="border-bottom:0.05em solid">certain speed</span> for a <span style="border-bottom:0.05em solid">certain duration</span> when a <span style="border-bottom:0.05em solid">button is pressed</span>. To do this we will need to create our own “DriveTrain” Subsystem class, a “DriveForward” Command class, and write code in the RobotContainer class so that both these are used properly and so our button will be connected to the DriveForward command. We will cover all of this in this guide.</p><div><pre id="c53cf7a3-40ab-4b1d-bb37-960fa2ab5494" class="code"><code>/*
+ *                                                                    ┌─────────────────────┐
+ *                                                                    │Physical Button Input│
+ *                                                                    └───────┬─────────────┘
+ *                                                                            │
+ *                                                                            │
+ * ┌────────────────────────┬───────────────┬─────────────────────────────────┼──────────────┐
+ * │                        │Robot Container│                                 │              │
+ * │                        └───────────────┘                                 │              │
+ * │  ┌───────────────────┐                                          ┌────────▼───────┐      │
+ * │  │DriveTrain Instance│                                          │Button Variable │      │
+ * │  └─────┬─────────────┘                                          └────────────────┘      │
+ * │        │                                                                                │
+ * │        │  ┌────────────────────┬───────────────────────────────────────────────────┐    │
+ * │        │  │DriveForward Command│                                                   │    │
+ * │        │  ├────────────────────┘                                                   │    │
+ * │        │  │                                              ┌─────┐     ┌────────┐    │    │
+ * │        │  │                                              │Speed│     │Duration│    │    │
+ * │        │  │                                              └──┬──┘     └───┬────┘    │    │
+ * │        │  │     ┌────────────────────────────────────────┬──▼────────────▼─┐       │    │
+ * │        └──┼─────►DriveForward&#x27;s Local DriveTrain Variable│                 │       │    │
+ * │           │     ┌────────────────────────────────────────┘                 │       │    │
+ * │           │     │                                                          │       │    │
+ * │           │     │                                                          │       │    │
+ * │           │     │                                  ┌───────────┬───────┐   │       │    │
+ * │           │     │                                  │PWMSparkMax│       │   │       │    │
+ * │           │     │                                  ├───────────┘       │   │       │    │
+ * │           │     │                                  │                   │   │       │    │
+ * │           │     │                                  │                   │   │       │    │
+ * │           │     │                                  │                   │   │       │    │
+ * │           │     │                                  └──────────┬────────┘   │       │    │
+ * │           │     │                                             │            │       │    │
+ * │           │     └─────────────────────────────────────────────┼────────────┘       │    │
+ * │           │                                                   │                    │    │
+ * │           │                                                   │                    │    │
+ * │           └───────────────────────────────────────────────────┼────────────────────┘    │
+ * │                                                               │                         │
+ * │                                                               │                         │
+ * └───────────────────────────────────────────────────────────────┼─────────────────────────┘
+ *                                                                 │
+ *                                                                 │
+ *                                                                 │
+ *                                                      ┌──────────▼─────────┐
+ *                                                      │Physical Motor Speed│
+ *                                                      └────────────────────┘
+ */
+/* needs to show that the local drivetrain variable is assigned THROUGH the use of the constructor for that 
+ class and show what other methods do as well*/</code></pre></div><h2 id="cf5318fe-1ca4-4ad4-9fb9-6c4aa52e000e" class="">The Major Classes in the WPI Library</h2><p id="ebbb85bb-1f5c-4ae6-93f9-405d3892d0c8" class="">There are a few major classes used to organize the process of programming the robot.</p><h3 id="a5bed319-2320-472f-822f-79ae5be3baf5" class="block-color-blue_background">“<strong>Constants” Class</strong></h3><ul id="b11a6775-010b-450b-9206-a460dc8c6267" class="bulleted-list"><li style="list-style-type:disc">So a class is just a collection of variables and functions, correct? Let’s start with one of the least complex classes in this system, the “Constants” class. This class is just a collection of frequently used, unchanging values stored in variables. Literally just a class full of strings and numbers or whatever else we might use. </li></ul><ul id="34295465-0dbc-4a24-981c-c3176b725ba3" class="bulleted-list"><li style="list-style-type:disc">The most common way this class is used is to store where each physical part is wired on the roboRIO, and so we will do that in order to show how this class works.</li></ul><ul id="1beba404-43c5-4752-a46f-a6ac5b41b8dc" class="toggle"><li><details open=""><summary>Let’s go ahead and and look at an example of the “Constants” class. (expand by clicking the triangle on the left)</summary><pre id="a802f648-d312-4e09-865c-4ba73a299df2" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot;
+
+/**
+ * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants should be declared
+ * globally (i.e. public static). Do not put anything functional in this class.
+ *
+ * &lt;p&gt;It is advised to statically import this class (or one of its inner classes) wherever the
+ * constants are needed, to reduce verbosity.
+ */
+public final class Constants {
+    public static final int leftMotorPort = 0;
+    public static final int rightMotorPort = 1;
+}</code></pre></details></li></ul><ul id="a3a3526c-d06e-4c9e-9542-cb18414761dc" class="bulleted-list"><li style="list-style-type:disc">Most of what is written above is taken from the default template’s “Constants.java” file. The only lines I have added are the ones that declare the variables “leftMotorPort” and “rightMotorPort”. Do not worry about all of the keywords <code>public static final</code> for right now, we will explain some of those key words in a later section.</li></ul><ul id="ccfb3f0f-a6b3-42e2-89cd-d20f4dc08489" class="bulleted-list"><li style="list-style-type:disc">What this class allows us to do is give these port numbers a <span style="border-bottom:0.05em solid">common name</span> that can be used across our entire system of classes. If we choose these names intelligently, they will also act as descriptions of themselves. <code>leftMotorPort</code> will be used to store the port number of the motor controller that our left wheel is connected to.</li></ul><ul id="359650a4-4ed6-4bee-b78a-0540625c4dc3" class="bulleted-list"><li style="list-style-type:disc">Now we have what is called a “mapping” of port numbers to names. We will revisit this class and show how it can be used when we cover “Subsystems”. </li></ul><h3 id="8b94de7c-0426-4230-add3-98a75e436625" class="block-color-orange_background">*<strong>Each type of physical part has its own class</strong>*</h3><ul id="f2a41758-dcec-4e37-8172-c7546fb830fd" class="bulleted-list"><li style="list-style-type:disc">Each physical part of the robot that is connected to the RoboRIO micro controller will have a <em>class </em>associated with it. Whether that be a motor a proximity sensor or some other component. We do not need to make these classes ourselves.</li></ul><ul id="992a8c53-7997-42a5-ac4e-51a459d92fe1" class="bulleted-list"><li style="list-style-type:disc">Example: A motor on the robot is represented by the class “PWMSparkMax”<em> </em>or “PWMTalonFX” or some other class data type that corresponds with the specific type of motor controller that we are using</li></ul><ul id="025b7f84-13c6-4bf9-af27-00463c544df7" class="bulleted-list"><li style="list-style-type:disc">In order to find a class we can use for a part, we search<mark class="highlight-blue"> </mark><mark class="highlight-blue"><a href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/index.html">the documentation of the WPI Library</a></mark>. In these documents it will show us what the class (the black box) is capable of and how it should be used.<ul id="8db8a6ef-be95-4978-85ad-3e9791d756d4" class="bulleted-list"><li style="list-style-type:circle">It can sometimes feel overwhelming (even for me) to sort through documents, so do <span style="border-bottom:0.05em solid">do not hesitate to ask for help with this</span> (or anything for that matter lol). You won’t need to look through these documents yourself in order to follow the rest of this walkth</li></ul></li></ul><h3 id="f4e5608d-6971-4dfc-ae38-38bc3c0537ce" class="block-color-pink_background">“<strong>Subsystem” Class</strong></h3><ul id="15a3b649-96d9-4ffc-b285-2571a38f8d0d" class="bulleted-list"><li style="list-style-type:circle">A <em>subsystem</em> is a collection of parts that perform a distinct task.</li></ul><ul id="62707d0a-0124-4bfe-bc1e-f7f5a66f0946" class="bulleted-list"><li style="list-style-type:disc">We use the “Subsystem” class to divide the parts physically connected to our Robo RIO into subsystems.</li></ul><ul id="61ad573c-88a3-44b1-821b-077f4f7ea996" class="bulleted-list"><li style="list-style-type:disc">You might be asking why we even want to do this in the first place. To answer this question, let’s use our robot as an example and discuss two ways of designing it. Our robot has two primary purposes: <strong>driving</strong> and <strong>scoring in the lower goal</strong>. <ol type="1" id="ad136dec-fb3e-47a0-8e42-4b065594ce94" class="numbered-list" start="1"><li>Driving</li></ol><ol type="1" id="6f82c8b2-c27e-41e3-a565-5edf6e218463" class="numbered-list" start="2"><li>Release cargo into the lower goal.</li></ol></li></ul><ul id="998560a0-da81-4af4-8a38-1d2223d1d7f9" class="bulleted-list"><li style="list-style-type:disc">Let’s first consider one way of designing our system and an alternative. One way that we could design our code is to declare a single “system” that contains all of the parts of our robot. This would mean that the motor for opening the cargo compartment (for scoring) would be found in the same class as the motor for turning our robot’s wheels. Although it is possible to design our system in this way, and it would work if we wrote it correctly, it makes our system disorganized. The motors attached to our wheels have no direct influence on the parts of our scoring system, so having them in the same class makes reading our code and fixing it painful.</li></ul><ul id="de30b54c-a485-4c49-91f2-740f5633897c" class="bulleted-list"><li style="list-style-type:disc">Instead we can create two different “Subsystem” classes. One that contains all of the parts needed for driving (motors for wheels) and another that contains all of the parts needed for our cargo releasing system. By doing this we create 2 “black boxes” that are easier to understand from the outside. This will make more sense after we learn how the “Command” class works.</li></ul><ul id="270227f6-4782-433f-bce1-22d0bc7418aa" class="bulleted-list"><li style="list-style-type:disc">This is an <span style="border-bottom:0.05em solid"><strong>empty</strong></span> template for a “DriveTrain” subsystem. This will be a drivetrain subsystem responsible for driving our robot using the motors connected to the wheels once we walk through filling it out.<pre id="8c230e9b-b392-4c8b-b852-4ee9c4700576" class="code"><code>package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class DriveTrain extends SubsystemBase {
+  /** Creates a new DriveTrain. */
+  public DriveTrain() {}
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}</code></pre></li></ul><ul id="48337748-dae8-473f-873f-c95cd60db090" class="bulleted-list"><li style="list-style-type:circle">We don’t need to pay too much attention to the first two lines of this code right now. Basically they tell our program that we are building on top of some other code in the WPI Library and those two lines tell it where to find the code we are building on top of. Sometimes when we want to use other classes in the WPI Library we need to tell it where to import those files from. This process can often times be done automatically through VSCode, I can walk you through that if it is an issue.</li></ul><ul id="b8f7e08d-b695-48d5-852a-f74d853e5cf3" class="bulleted-list"><li style="list-style-type:disc">The line <mark class="highlight-blue"><code>public class</code></mark><code> </code><mark class="highlight-red"><code>DriveTrain</code></mark><code> </code><mark class="highlight-blue"><code>extends</code></mark><code> </code><mark class="highlight-red"><code>SubsystemBase</code></mark> from the above selection of code is telling our program “hey, I am creating a new Subsystem class”<ul id="f9d20cc0-f9fe-4549-87c0-2ef1d16549f8" class="toggle"><li><details open=""><summary>I explain each word of this line here. (click the triangle on the left to reveal the hidden text)</summary><ul id="36d2c050-0402-44a4-bf5d-5aeb59b72a5e" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-blue"><code>public</code></mark> - make this class available for other classes to use</li></ul><ul id="ab03771d-e6fb-4a55-861a-4b31318513e4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>class</code></mark> - the type of object that this is the same as if we were declaring a float or an integer</li></ul><ul id="9d08fe74-7402-4543-b980-ee5473469501" class="bulleted-list"><li style="list-style-type:disc"><code>DriveTrain</code> - this is the name of our class. If we wanted to we could have named it ElfWithAnAbacus, but this name describes the purpose of this class better making our codse easier to understand.</li></ul><ul id="9c611b1f-20be-4cbb-bd71-5bd7fcc58fec" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>extends</code></mark><code> SubsystemBase</code> - “SubsystemBase” is the set of requirements to make a new Subsystem class. By saying that the class we are creating “extends” the “SubsystemBase”, we are telling the computer to let us know if there are any requirements for making a Subsystem that we did not fulfill.</li></ul></details></li></ul></li></ul><ul id="0425acfc-50e7-44b9-8988-cb44864f9cf3" class="bulleted-list"><li style="list-style-type:disc">Before we move to the next line, we need to declare the variables that will be part of our “DriveTrain” subsystem, so that they can be used in each of the functions that are defined afterwards<ul id="b1ad5b45-0d32-4914-bc00-25f3b3059725" class="bulleted-list"><li style="list-style-type:square">Earlier we mentioned how the class called “PWMSparkMax” is the class that is used to control the motors. Since we have two motors in our driving system, we will declare two variables of this type. This is what it looks like to do this.<pre id="addee05e-0f98-47ee-884b-59da9a959ac2" class="code"><code>private final PWMSparkMax leftMotor = new PWMSparkMax(0);
+private final PWMSparkMax rightMotor = new PWMSparkMax(1);</code></pre></li></ul><ul id="bcd4fea0-1c2a-4405-8a32-39b3345b95e5" class="toggle"><li><details open=""><summary>Open this dropdown to see what each part of these statements means</summary><ul id="f374bfe7-f148-40ca-84a9-a88eea429fab" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>private</code></mark> - remember when we talked about “black boxes”? This keyword helps us maintain the concept of a black box. What this word indicates is that the variable being declared can <span style="border-bottom:0.05em solid"><strong>only</strong></span> be <span style="border-bottom:0.05em solid"><strong>directly</strong></span> <span style="border-bottom:0.05em solid"><strong>accessed</strong></span> <strong><span style="border-bottom:0.05em solid">within the class that it is declared</span></strong>. We don’t want the system outside of this black box to know about each individual motor in the drive train. We <span style="border-bottom:0.05em solid"><strong>only</strong></span> want the rest of the system to know that they are allowed to tell the drive train to do “abstract” things like <em>move forward/backward</em> and <em>turn</em>. In contrast, the word <strong>public </strong>explicitly “exposes” a part of the class that we want the code outside this class to use.</li></ul><ul id="8c33a457-e1b2-4259-9506-04a31a9956a1" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>final</code></mark> - this key word is used in order to tell the program that this variable is not supposed to be modified at all once it has been created. If some part of our code tries to change it, then there should be an error. This might sound pointless, but it is actually useful for making sure that we are using our code like we are supposed to. Instead of spending time debugging a problem that resulted from changing something we weren’t supposed to, this will make it so that we are immediately alerted of incorrect usage. <ul id="fb094883-3e94-4a51-aa23-c3e4e000e0b6" class="bulleted-list"><li style="list-style-type:circle">This only applies to things that do not change while our program is being run. If you have a variable that is supposed to change over time this safe gaurd does not apply. In this case, we know that the port that our motor is wired into will never change, so it is useful to have this safegaurd.</li></ul></li></ul><ul id="3ba039e3-84a8-42ea-886d-279b109f51db" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><code>PWMSparkMax</code></mark><mark class="highlight-red"> </mark>- this is what indicates what data type this is. This is an instance of a “PWMSparkMax” class</li></ul><ul id="bb73c9ae-5368-4a53-851d-b7b13b9c792e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-gray"><code>leftMotor</code></mark><mark class="highlight-gray"> </mark>- the name that we will use to refer to the instance of “PWMSparkMax” that controls left motor variable</li></ul><ul id="73305439-f9f1-4574-b455-b6f176b523c6" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>new</code></mark><code> </code><mark class="highlight-red"><code>PWMSparkMax</code></mark><mark class="highlight-gray"><code>(</code></mark><code>0</code><mark class="highlight-gray"><code>);</code></mark><mark class="highlight-gray"> </mark>- this is used to create a new <span style="border-bottom:0.05em solid">instance</span> of the “PWMSparkMax” class. It takes the “argument” <code>0</code> to indicate the port on the board where our motor is located. In this case, it is the port where our left motor is connected on the RoboRIO.<ul id="a705ac66-68ae-4518-8e59-8015bc99d8a2" class="bulleted-list"><li style="list-style-type:circle">This information (and more about this class’s functionality) can also be found in the WPI Library documents <mark class="highlight-blue"><a href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/motorcontrol/PWMSparkMax.html">here</a></mark></li></ul></li></ul></details></li></ul><ul id="d29bfac1-246d-413b-89ca-3277ddc75659" class="toggle"><li><details open=""><summary>Here is our “DriveTrain” class so far:</summary><pre id="befe2024-4dd3-4674-8270-726f25e23775" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class DriveTrain extends SubsystemBase {
+  /** Creates a new DriveTrain. */
+  private final PWMSparkMax leftMotor = new PWMSparkMax(0);
+  private final PWMSparkMax rightMotor = new PWMSparkMax(1);
+
+  public DriveTrain() {
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}</code></pre></details></li></ul></li></ul><ul id="7c5a60b9-4137-4717-830f-b5f37fbfbff5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code>public</code></mark><code> </code><mark class="highlight-red"><code>DriveTrain</code></mark><mark class="highlight-gray"><code>() {}</code></mark> is a function that we will use to set the initial state of the items within our “Subsystem” class. This type of function is referred to as a <mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid"><em><strong>constructor</strong></em></span></mark>. “Constructor” refers to a function that “constructs” and <span style="border-bottom:0.05em solid">instance</span> of a class based on the parameters  provided to it. We will explain more about constructors and instances before we move on to the “Commands” section.</li></ul><ul id="b897d778-9e11-4b27-9529-324f3bde38c8" class="bulleted-list"><li style="list-style-type:disc">One thing we will want to do in the <span style="border-bottom:0.05em solid">constructor</span> for this “DriveTrain” class is invert one of the motors, if we have two motors on our robot for driving the left and right wheels, we need to invert one of the motors so that the wheels spin in the same direction.<ul id="b0c5a8d9-9c63-409e-9d58-2dd5a8a57dfa" class="bulleted-list"><li style="list-style-type:square">It sounds kinda confusing but let’s just think about the actual physical robot for a second. We are using the same type of motor on both sides, but we need to rotate the motor so that we can attach it to the wheel on the other side. This means that unless we invert one of the motors, the wheels will turn opposite directions.<ul id="b38c20d6-177a-4781-b088-2f8946a8e97f" class="toggle"><li><details open=""><summary>We can invert the motor using one of PWMSparkMax’s “methods” (functions inside of a class that are made available to us). This method and instructions on how to use it can be found in the documents.</summary><figure id="0d698b4c-f64e-4306-b31b-d9506dd2eca5" class="image"><a href="How%20do%20I%20make%20the%20f&amp;%20@-ing%20robot%20move%200d698b4cf64e4306b31bd9506dd2eca5/Screen_Shot_2022-01-24_at_4.15.07_PM.png"><img style="width:336px" src="How%20do%20I%20make%20the%20f&amp;%20@-ing%20robot%20move%200d698b4cf64e4306b31bd9506dd2eca5/Screen_Shot_2022-01-24_at_4.15.07_PM.png"/></a></figure><p id="e592ac49-2dc9-4cae-8c2c-f34b74932806" class="">The method “expects” a “boolean” type as an <span style="border-bottom:0.05em solid">argument</span>. A “boolean” is just a data type that stores whether something is “true” or “false”. Because we want the right motor to be inverted, we “pass” this method a boolean value of “true” in the call to the function.</p><p id="0968a7ec-054e-4992-ac78-169c1a175b32" class=""><code>rightMotor.setInverted(true)</code></p><ul id="3ddaa825-d47f-4391-ac78-7ef457e801a3" class="toggle"><li><details open=""><summary>What is an “argument”?</summary><p id="9f298743-0fd1-4185-987f-1d8a97b3d5c1" class="">A value provided by the user at the time a function is called. Here are two function calls that supply different arguments.</p><ul id="ae92817d-c368-48af-99d9-f464c6089c44" class="bulleted-list"><li style="list-style-type:disc"><code>add(1,2)</code> . This will return <code>3</code> as the sum.</li></ul><ul id="f645b291-44e4-46d3-9926-826b99388400" class="bulleted-list"><li style="list-style-type:disc"><code>add(456,1024)</code></li></ul></details></li></ul></details></li></ul></li></ul><ul id="62150efd-e0ea-4e6d-8e61-ff56fad9900b" class="toggle"><li><details open=""><summary>Example of our <code>DriveTrain()</code> <span style="border-bottom:0.05em solid">constructor</span> method</summary><pre id="d0d4a607-4e08-4822-9faa-53a2152687ce" class="code"><code>public Drivetrain(){
+	rightMotor.setInverted(true)
+}</code></pre></details></li></ul></li></ul><ul id="77e2a73b-039e-40aa-bfe4-c30559383507" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-blue"><code>public</code></mark><code> </code><mark class="highlight-red"><code>Periodic</code></mark><mark class="highlight-gray"><code>() {}</code></mark><mark class="highlight-gray"> </mark><mark class="highlight-red">I don’t know what this is useful for yet, but we need to have it there even if it is empty. It’s part of the template.</mark></li></ul><ul id="bcbfe6bb-3e3d-4fa0-b260-3396e85a7cdf" class="toggle"><li><details open=""><summary>Now that we have 2 motors defined in our system, we can now define our own “method” in this class that can be used to drive the robot forward. This will become useful when we create our own “command” later on. Methods are the way that we allow people to use the black box that we are creating.</summary><ul id="273be757-a993-40ed-8333-d41e5161129b" class="bulleted-list"><li style="list-style-type:square">Let’s call this method “forward”. </li></ul><ul id="cdb2f02e-cf9b-49b0-9e64-826d4468e5f3" class="bulleted-list"><li style="list-style-type:disc">We want this method to take one parameter that corresponds with the speed the motors should turn forward.</li></ul><ul id="b00a84e9-efdf-44bb-8e74-a045bb561d1d" class="bulleted-list"><li style="list-style-type:disc">The PWMSparkMax class has a “method” that wee need to use in order to set the speed that the motor is turning. It expects a value between <code>-1.0</code> and <code>1.0</code><ul id="534c51d5-d0fb-4d66-b3bc-ffcbcf40d830" class="bulleted-list"><li style="list-style-type:disc">With that in mind, our function definition will look like this<p id="11ec5558-5b6c-4eb0-88fc-4b457665f36e" class=""><mark class="highlight-blue"><code>public void</code></mark><code> forward(double speed){}</code></p><ul id="17e427e9-16b9-4048-be33-259c4906c3c4" class="toggle"><li><details open=""><summary>What is a <code>double</code> ?</summary><p id="237d4a69-e3ea-4651-bec6-45f8132c6c5a" class="">A <code>double</code> is a data type that can hold a decimal. This is in contrast to an <code>int</code> or “integer” that can <strong><span style="border-bottom:0.05em solid">only</span></strong> represent whole numbers like 1, 2, 3, ...</p><p id="8a6e0cfc-fcd6-4979-9053-98daf97f21ea" class="">Below is the same number “1” in two different forms:</p><p id="f2ac9b45-28b2-41a4-9082-00bb150a6152" class=""><code>int</code> : 1</p><p id="68b1c3ac-ed6e-4830-9bcf-a4e746d29a73" class=""><code>double</code> : 1.0</p><p id="4e79cf22-e24c-4057-8e29-a6d52db44c7b" class="">The value of something like <code>0.9</code> or <code>6.8</code> cannot be held in an <code>int</code> type, but a <code>double</code> can be used instead</p></details></li></ul></li></ul><ul id="d5b75aaf-b7bb-44c5-8af3-a9220e80c5e5" class="bulleted-list"><li style="list-style-type:circle">it is <code>public</code> because we want it to be available or “exposed” for outside code to use, and <code>void</code>, because we are not returning anything, we are just setting the speed of the motors.</li></ul></li></ul><ul id="9ef70cdd-241a-4d79-bdcb-2525a8bd7ed9" class="bulleted-list"><li style="list-style-type:disc">In the “body” of the function, we will set the speed of the left motor and the right motor to the value that was “passed” to us in the function. This is the <code>double speed</code> we just talked about.</li></ul><ul id="73ef829d-386b-419d-82e8-6a2251025971" class="bulleted-list"><li style="list-style-type:disc">ONE MORE IMPORTANT STEP, we want to make sure that the value we were given is a positive value and that it fits in the range from <code>-1.0</code> to <code>1.0</code>. If we don’t, we may have an unexpected result or potentially damage our robot.<p id="dc1952bf-a276-471b-84be-477e097d38f7" class="">Consider what might happen if code outside this class calls this function in this way <code>forward(-1.0)</code>. The function will set the motors to run in reverse at full speed. Not exactly what we would want to happen when we call a method called “forward”.</p><p id="e6229025-232e-4903-a205-4bcd29287afb" class="">Now consider what might happen if <code>forward(10.0)</code> is called. If there aren’t any other safegaurds, we might break something on our robot because the value is too high.</p></li></ul></details></li></ul><ul id="9e85e2f8-a755-475c-bc77-4103e82a8fa0" class="toggle"><li><details open=""><summary>Let’s define another method called <code>stopDriving()</code> that will set the motors back to <code>0.0</code> . We should note that this is exactly the same thing that <code>forward(0.0)</code> would do, but the only way we would know that is if we know how the <code>forward</code> function works. The goal of creating this class is to create a “black box” where outside code can interact with it in terms of “go forward this fast” and “stop” instead of in terms of “set motors to this value”. Notice how outside users don’t need to know very much about how the internals work, they just need to tell it when to go forward and when to stop.</summary><ul id="248b25e8-d354-49fe-8e29-1f67bf3343cc" class="bulleted-list"><li style="list-style-type:disc">In an effort to help you learn, I suggest you try to make this function on your own. It is exactly the same as the function we made before, except we will set the motor values to <code>0.0</code> every time this function is called instead of the <code>double speed</code> value that we were using before. I have put the completed example of this subsystem at the end, but again, I highly recommend you try this on your own.</li></ul><ul id="c1268a5d-00a6-49f9-b8aa-b2bc62da9fe8" class="toggle"><li><details open=""><summary>Here is the complete example <span style="border-bottom:0.05em solid">WITHOUT</span> the <code>stopDriving()</code> method/function. Use this as your base. I’d love to help you if you need assistance.</summary><pre id="42ca0519-ebe5-4dab-8f19-6dc71d10b051" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class DriveTrain extends SubsystemBase {
+  /** Creates a new DriveTrain. */
+  private final PWMSparkMax leftMotor = new PWMSparkMax(0);
+  private final PWMSparkMax rightMotor = new PWMSparkMax(1);
+
+  public DriveTrain() {
+    rightMotor.setInverted(true);
+  }
+
+  // sets the motors to move at a certain speed, so long as it is a positive value between 0 and 1
+  public void forward(double speed){
+    // before we send this value to the motors we want to only send it if it is a value between 0.0 and 1.0
+    // anything else is an invalid value for this function, because we are going FORWARD
+    if(speed &lt; 1.0 &amp;&amp; speed &gt; 0.0){
+      leftMotor.set(speed);
+      rightMotor.set(speed);
+    }
+    else{
+      // we enter this block if we are given a bad value, let&#x27;s just set the motors to zero
+      leftMotor.set(0.0);
+      rightMotor.set(0.0);
+    }
+  }
+
+  // function that stops the motors
+  public void stop(){
+    // implement the stop() function here
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}</code></pre></details></li></ul></details></li></ul><ul id="b6523d18-906b-44b4-ab79-97ae52dae25e" class="toggle"><li><details open=""><summary>Here is a completed example of the “DriveTrain” subsystem with our <code>forward(double speed)</code> and <code>stopDriving()</code> methods fully implemented:</summary><pre id="e5a59c73-d2eb-4303-adb5-f334f564b958" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class DriveTrain extends SubsystemBase {
+  /** Creates a new DriveTrain. */
+  private final PWMSparkMax leftMotor = new PWMSparkMax(0);
+  private final PWMSparkMax rightMotor = new PWMSparkMax(1);
+	
+	// this is the function that sets the defaults when this class is created
+  public DriveTrain() {
+    rightMotor.setInverted(true);
+  }
+
+  // sets the motors to move at a certain speed, so long as it is a positive value between 0 and 1
+  public void forward(double speed){
+    // before we send this value to the motors we want to only send it if it is a value between 0.0 and 1.0
+    // anything else is an invalid value for this function, because we are going FORWARD
+    if(speed &gt; 0.0 &amp;&amp; speed &lt; 1.0){
+      leftMotor.set(speed);
+      rightMotor.set(speed);
+    }
+    else{
+      // we enter this block if we are given bad values, let&#x27;s just set the motors to zero
+      leftMotor.set(0.0);
+      rightMotor.set(0.0);
+    }
+  }
+
+  // function that stops the motors
+  public void stop(){
+    leftMotor.set(0.0);
+    rightMotor.set(0.0);
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}</code></pre></details></li></ul><h3 id="f6280a69-c2f0-4eec-b835-619ecf20418d" class="block-color-red_background">“<strong>RobotContainer” Class</strong></h3><ul id="9bfc36c6-b0cb-4e9e-80c5-8dc31cdc2780" class="toggle"><li><details open=""><summary>Now is a good time to take another look at the diagram of the system that we are creating, so that we can see what we have covered so far and how it fits into the larger system</summary><div><div><pre id="c53cf7a3-40ab-4b1d-bb37-960fa2ab5494" class="code"><code>/*
+ *                                                                    ┌─────────────────────┐
+ *                                                                    │Physical Button Input│
+ *                                                                    └───────┬─────────────┘
+ *                                                                            │
+ *                                                                            │
+ * ┌────────────────────────┬───────────────┬─────────────────────────────────┼──────────────┐
+ * │                        │Robot Container│                                 │              │
+ * │                        └───────────────┘                                 │              │
+ * │  ┌───────────────────┐                                          ┌────────▼───────┐      │
+ * │  │DriveTrain Instance│                                          │Button Variable │      │
+ * │  └─────┬─────────────┘                                          └────────────────┘      │
+ * │        │                                                                                │
+ * │        │  ┌────────────────────┬───────────────────────────────────────────────────┐    │
+ * │        │  │DriveForward Command│                                                   │    │
+ * │        │  ├────────────────────┘                                                   │    │
+ * │        │  │                                              ┌─────┐     ┌────────┐    │    │
+ * │        │  │                                              │Speed│     │Duration│    │    │
+ * │        │  │                                              └──┬──┘     └───┬────┘    │    │
+ * │        │  │     ┌────────────────────────────────────────┬──▼────────────▼─┐       │    │
+ * │        └──┼─────►DriveForward&#x27;s Local DriveTrain Variable│                 │       │    │
+ * │           │     ┌────────────────────────────────────────┘                 │       │    │
+ * │           │     │                                                          │       │    │
+ * │           │     │                                                          │       │    │
+ * │           │     │                                  ┌───────────┬───────┐   │       │    │
+ * │           │     │                                  │PWMSparkMax│       │   │       │    │
+ * │           │     │                                  ├───────────┘       │   │       │    │
+ * │           │     │                                  │                   │   │       │    │
+ * │           │     │                                  │                   │   │       │    │
+ * │           │     │                                  │                   │   │       │    │
+ * │           │     │                                  └──────────┬────────┘   │       │    │
+ * │           │     │                                             │            │       │    │
+ * │           │     └─────────────────────────────────────────────┼────────────┘       │    │
+ * │           │                                                   │                    │    │
+ * │           │                                                   │                    │    │
+ * │           └───────────────────────────────────────────────────┼────────────────────┘    │
+ * │                                                               │                         │
+ * │                                                               │                         │
+ * └───────────────────────────────────────────────────────────────┼─────────────────────────┘
+ *                                                                 │
+ *                                                                 │
+ *                                                                 │
+ *                                                      ┌──────────▼─────────┐
+ *                                                      │Physical Motor Speed│
+ *                                                      └────────────────────┘
+ */
+/* needs to show that the local drivetrain variable is assigned THROUGH the use of the constructor for that 
+ class and show what other methods do as well*/</code></pre></div><p id="1c137e26-9653-4a2e-8ce8-5de66bdb614d" class="">
+</p></div></details></li></ul><ul id="4b6e4e9f-b940-450a-a17e-712f88a5cd7f" class="bulleted-list"><li style="list-style-type:circle">Why are we covering the “RobotContainer” before the “Command” class?<ul id="a3efa1fc-c5fa-4cd0-a1d2-69987acb28c3" class="bulleted-list"><li style="list-style-type:square">“RobotContainer” is the class that directly uses the “Command” class. By understanding the purpose of “RobotContainer” first, we can better understand why the “Command” class is structured the way it is.</li></ul><ul id="5231fe1c-f6d2-407c-86a2-86d43c6d1ac4" class="bulleted-list"><li style="list-style-type:circle">In short, the purpose of the “Command” class is to provide a set of instructions to a subsystem or set of subsystems. It does this by using the methods that the subsystems make available for use.<ul id="faf9b2a2-a7d4-4ce0-8975-564375333922" class="bulleted-list"><li style="list-style-type:disc">the <mark class="highlight-blue"><code>public</code></mark><code> forward(</code><mark class="highlight-blue"><em><code>double</code></em></mark><em><code> speed</code></em><code>)</code> function in our “DriveTrain” subsystem is an example of a method that the “DriveForward” command might use.</li></ul></li></ul></li></ul><ul id="5fbc7c1c-7c17-4ffc-95c8-87f61adc66c9" class="bulleted-list"><li style="list-style-type:circle">Constructors<ul id="4cbfb8ed-3779-4e01-a0a3-8b3dbb50ac88" class="bulleted-list"><li style="list-style-type:square">As we mentioned earlier, constructors are functions that create <span style="border-bottom:0.05em solid">instances</span> of classes. But we didn’t fully explain what an “instance” is.</li></ul></li></ul><ul id="f22c7ff2-0143-48f3-be2a-bd51d40fa2fd" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>Variables</strong></mark> vs. <mark class="highlight-teal_background"><strong>Instances</strong></mark><ul id="f9df9d9f-e65f-4df8-b0da-855faf23534c" class="bulleted-list"><li style="list-style-type:square">“PWMSparkMax” is another class that has its own <span style="border-bottom:0.05em solid">constructor</span>. We just used this constructor when we wrote <mark class="highlight-blue"><code>new</code></mark><code> </code><mark class="highlight-orange"><code>PWMSparkMax</code></mark><mark class="highlight-gray"><code>(</code></mark><mark class="highlight-red"><code><em>port number</em></code></mark><mark class="highlight-gray"><code>)</code></mark>. This bit of code creates a new <span style="border-bottom:0.05em solid">instance</span> of the “PWMSparkMax” class based on the port number that we provided to it.</li></ul><ul id="4d24fe47-f039-47a8-b377-94bdc6ef4796" class="bulleted-list"><li style="list-style-type:circle">If we only wrote <mark class="highlight-blue"><code>private final</code></mark><code> PWMSparkMax rightMotor;</code> <strong><em>without</em></strong> using <code>= </code><mark class="highlight-blue"><code>new</code></mark><code> PWMSparkMax</code><mark class="highlight-gray"><code>(</code></mark><mark class="highlight-red"><code>1</code></mark><mark class="highlight-gray"><code>);</code></mark><mark class="highlight-gray"> </mark>we would have <span style="border-bottom:0.05em solid">declared</span> an variable <code>rightMotor</code>  that could hold an <span style="border-bottom:0.05em solid">instance</span> of the “PWMSparkMax”, but does not yet. At some later point we could give it an instance by writing <code>rightMotor =</code><mark class="highlight-blue"><code>new</code></mark><code> PWMSparkMax</code><mark class="highlight-gray"><code>(</code></mark><mark class="highlight-red"><code>1</code></mark><mark class="highlight-gray"><code>);</code></mark>. There are reasons for doing this that we will cover in the section covering “Commands”.</li></ul><ul id="72368b93-0572-4bca-8b76-d3d263e48e7c" class="bulleted-list"><li style="list-style-type:circle">The same effect can be seen if we declared a <code>int</code> variable with the line <mark class="highlight-blue"><code>int</code></mark><code> number</code><mark class="highlight-gray"><code>;</code></mark> . <p id="3316bb3b-2769-4359-a484-385148fbb0a3" class="">At this point an integer variable called “<code>number</code>” exists, but it does not contain a value until we assign one to it with a line like 
+<code>number = 3;</code></p></li></ul><ul id="cada7333-cc87-4eaa-bfc1-260c5bfdcb5d" class="bulleted-list"><li style="list-style-type:circle">Bottom line:<ul id="d545f4ae-57f0-4bf0-bb35-44e6728a8a23" class="bulleted-list"><li style="list-style-type:disc"><strong>Variable</strong> - A place that can hold an instance and a name that can be used to access the data inside the instance</li></ul><ul id="64e2fbd2-7ca4-4f1f-85c1-f64889730462" class="bulleted-list"><li style="list-style-type:square"><strong>Instance </strong>- section of data created by a constructor for a class</li></ul></li></ul><ul id="c46dfc7c-5a45-4408-8769-92be9d39b1d2" class="bulleted-list"><li style="list-style-type:circle">⬆️ This concept is important and tricky. If you don’t feel like you could explain it yourself, <em>please ask me to clarify</em></li></ul></li></ul><ul id="312cac1a-b966-4852-99cb-aa8b8c247288" class="bulleted-list"><li style="list-style-type:circle">Here is what the <strong><span style="border-bottom:0.05em solid">empty template</span></strong> for the “RobotContainer” class looks like<pre id="af6ca338-5967-42d4-a9ce-bbc33c961b4d" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot;
+
+import edu.wpi.first.wpilibj.GenericHID;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
+
+/**
+ * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * &quot;declarative&quot; paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * subsystems, commands, and button mappings) should be declared here.
+ */
+public class RobotContainer {
+  // The robot&#x27;s subsystems and commands are defined here...
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  
+	/** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public RobotContainer() {
+    // Configure the button bindings
+    configureButtonBindings();
+  }
+
+  /**
+   * Use this method to define your button-&gt;command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
+  private void configureButtonBindings() {
+  }
+
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return m_autoCommand;
+  }
+}</code></pre></li></ul><ul id="9a021562-46d8-4a52-8ce7-cda7b94951bb" class="bulleted-list"><li style="list-style-type:circle">The job of the RobotContainer is to:<ol type="1" id="5a678c66-c8ef-4eda-a931-fea0254f013f" class="numbered-list" start="1"><li>Use the constructor for each subsystem to create <span style="border-bottom:0.05em solid"><strong>a </strong></span><span style="border-bottom:0.05em solid"><strong><em>single instance</em></strong></span> of our subsystem(s).</li></ol><ol type="1" id="a096803b-0b66-42bd-9dcb-5be5772624f1" class="numbered-list" start="2"><li>Use each command’s constructor to create an instance of our command(s)<ul id="970ea9a8-e51c-4c42-b297-939656958ffd" class="bulleted-list"><li style="list-style-type:disc">Steps 1 and 2 are written in the section with the comment <mark class="highlight-gray"><code>// The robot&#x27;s subsystems and commands are defined here...</code></mark></li></ul></li></ol><ol type="1" id="92e9183e-64ae-45a3-b846-0c6488e75cb2" class="numbered-list" start="3"><li>Supply the Command(s) that we create with the inputs they need<ol type="a" id="dc0f5b99-068a-4737-b496-6b8947c67764" class="numbered-list" start="1"><li>Joystick Values</li></ol><ol type="a" id="18a38f4d-db99-4576-9b42-f76b989466be" class="numbered-list" start="2"><li>Button Values</li></ol><ol type="a" id="c4c8fc22-7ca9-41a2-a8ff-e7f9001a7282" class="numbered-list" start="3"><li>Instance of a Subsystem it needs to use.</li></ol><ol type="a" id="b81551ef-2db5-48a5-afcd-8e26bb747a97" class="numbered-list" start="4"><li>Other values</li></ol><ul id="5ab742ea-e9de-484f-a987-f9bb77846f43" class="bulleted-list"><li style="list-style-type:disc">This is done in the <code>configureButtonBindings()</code> method in this class</li></ul></li></ol></li></ul><ul id="d6f468fb-d14e-4c35-b02d-9c5126f70a20" class="bulleted-list"><li style="list-style-type:circle">So why did we cover the distinction between <span style="border-bottom:0.05em solid">variables</span> and <span style="border-bottom:0.05em solid">instances</span> in the section about the “RobotContainer”?<ul id="8604c15f-d859-4043-90f8-ebd621b88679" class="bulleted-list"><li style="list-style-type:square">I’m about to drop a bit of a bombshell on you: Our overall robot code will be able to run more than one “Command” at the same time.<p id="384c5b83-703f-4e40-bca3-f232cff3d564" class=""><strong><span style="border-bottom:0.05em solid"><mark class="highlight-purple"><em>PleaseDon’tPanicIt’sGonnaBeOk.</em></mark></span></strong> We don’t need to worry about how this is accomplished, it’s just one of those black boxes we can take for granted as long as we follow the rules I set out in this section.</p></li></ul><ul id="e92ca8a7-3bc0-4924-937c-5f65411873da" class="bulleted-list"><li style="list-style-type:circle">Because multiple commands can be run at the same time, we need a way of making sure that any <span style="border-bottom:0.05em solid">subsystem</span> can only be used by <span style="border-bottom:0.05em solid">one command at a time</span>. If we don’t protect our subsystems, then 2 commands running at the same time could tell the motors to turn forward and to stop at the same time.</li></ul><ul id="b6010ca7-d481-4ba9-8232-0df92894c421" class="bulleted-list"><li style="list-style-type:circle">We can protect our subsystems by:<ol type="1" id="e0102b0f-4247-4efd-baad-918d600f1e54" class="numbered-list" start="1"><li>Only declaring <span style="border-bottom:0.05em solid"><em><strong>one instance</strong></em></span> of each subsystem in “RobotContainer”</li></ol><ol type="1" id="aef7514d-aed9-4d1f-8b25-698f2062ce6e" class="numbered-list" start="2"><li>Passing that <span style="border-bottom:0.05em solid"><strong><em>same instance</em></strong></span> into the constructor of each command that needs it</li></ol><ol type="1" id="e2d543b3-e8c6-49b3-86e3-5a890c10bb4e" class="numbered-list" start="3"><li>Using a function in each command that makes sure it can have control of <strong><em><span style="border-bottom:0.05em solid">this instance</span></em></strong> of the subsystem before it starts telling the subsystem to do things. We will cover how that works in the next section.</li></ol></li></ul><ul id="e1dba5e0-c3fb-42de-b6af-7607f86c7c7d" class="toggle"><li><details open=""><summary>This is what it looks like to create a single instance of a subsystem:</summary><pre id="2b4d8aca-514e-45cf-b5ab-68c1b8fa1556" class="code"><code>private final DriveTrain m_drivetrain = new DriveTrain()</code></pre></details></li></ul><ul id="f0e58fc1-dd96-4e1a-8b9d-c059557488d7" class="toggle"><li><details open=""><summary>This is what it looks like to pass <mark class="highlight-yellow_background"><em><strong><span style="border-bottom:0.05em solid">this same instance</span></strong></em></mark> to the constructor of a Command that needs to use this subsystem.</summary><pre id="61dd58f6-96b3-4859-9487-fa7e17a49186" class="code"><code>private final DriveForward m_driveforward = new DriveForward(m_drivetrain)</code></pre><p id="9fa2c12f-fafb-44f7-84f5-e9a4deac816c" class=""><span style="border-bottom:0.05em solid"><strong><mark class="highlight-teal">Doing this</mark></strong></span> ⬆️ <mark class="highlight-teal"><strong><span style="border-bottom:0.05em solid">will</span></strong></mark> ensure that the same instance is passed to each command and we will be protected. </p><p id="d51ae389-8ad2-4f45-9dcb-4b3fcab1fbf0" class=""><span style="border-bottom:0.05em solid"><strong><mark class="highlight-red">Doing this</mark></strong></span><mark class="highlight-red"> </mark>⬇️ will create a new subsystem instance each time and <mark class="highlight-red"><strong><span style="border-bottom:0.05em solid">will not</span></strong></mark> protect from 2 commands trying to control the same set of parts at the same time</p><pre id="d738f4dd-9988-4f29-a6b9-4fbfe206a001" class="code"><code>private final DriveForward m_driveforward = new DriveForward(new DriveTrain())</code></pre></details></li></ul></li></ul><ul id="719a06e5-b884-480b-9c47-c9eec436bcba" class="bulleted-list"><li style="list-style-type:circle">This is what it will look like to declare an instance of our subsystem and our command in the robot container. I know we haven’t covered how to define our Command yet, but hold tight and trust that knowing how this works will help us understand how the “Command” class is written. <ul id="d4b63253-14c6-4615-a141-31eb5000ea00" class="toggle"><li><details open=""><summary>Here is our RobotContainer with our DriveTrain subsystem and DriveForward command declared.</summary><pre id="b4f3aeb2-2254-4620-acea-e731ba8d58c5" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot;
+
+import edu.wpi.first.wpilibj.GenericHID;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
+
+/**
+ * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * &quot;declarative&quot; paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * subsystems, commands, and button mappings) should be declared here.
+ */
+public class RobotContainer {
+  // The robot&#x27;s subsystems and commands are defined here...
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+	// follow the declaration of the above Example subsystem and command in order to declare our own subsystem and command
+	private final DriveTrain m_drivetrain = new DriveTrain();
+	// declare a new instance of our command and pass it the instance of the drive train that we just declared in the previous line
+	private final DriveForward m_driveForwardCommand = new DriveForward(m_drivetrain);
+
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public RobotContainer() {
+    // Configure the button bindings
+    configureButtonBindings();
+  }
+
+  /**
+   * Use this method to define your button-&gt;command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
+  private void configureButtonBindings() {
+		// we will cover this method in the section after the &quot;Command&quot; section
+  }
+
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return m_autoCommand;
+  }
+}</code></pre></details></li></ul></li></ul><ul id="4e0826d8-c07d-474f-ae3b-1ca22a12018d" class="bulleted-list"><li style="list-style-type:circle">We still have not covered how to bind buttons and joysticks to Commands (making it so that when I press a button a command will run, etc.). First, we will cover how to make our own Command and then we will revisit this idea.</li></ul><p id="8c6ea6f0-c3c4-4488-9ce9-18a4c317dab5" class="">
+</p><h3 id="51682656-ba54-4bf0-8c76-830cb8f27ff4" class="block-color-teal_background">“<strong>Command” Class</strong></h3><ul id="565ec26c-f551-4b30-87bb-ade36480031c" class="bulleted-list"><li style="list-style-type:circle">The “Command” class is used to provide a set of instructions to a subsystem or set of subsystems</li></ul><ul id="8c13a02a-6cbd-4c7f-bfb0-0238f9f5b1c1" class="bulleted-list"><li style="list-style-type:disc">Let’s walk through creating a command called “DriveForward” (which tells the robot to drive forward at a <span style="border-bottom:0.05em solid">certain speed</span> for a <span style="border-bottom:0.05em solid">certain amount of time</span>) as an example of a command. Let’s walk through how we might <span style="border-bottom:0.05em solid">implement</span> it using the “Command” class.</li></ul><ul id="d3f48254-b622-4c4b-aa70-40b5ab9dda1e" class="toggle"><li><details open=""><summary>This is an empty template for our “Command” class. By filling in the empty functions provided for us, we will create the “DriveForward” command</summary><pre id="c522bcd2-263d-40fd-b7df-224adced8620" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+public class DriveForward extends CommandBase {
+  /** Creates a new DriveForward. */
+  public DriveForward() {
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {}
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+}</code></pre></details></li></ul><ul id="5b0cd5ca-61a2-4255-859f-1dbf9adb1eb9" class="bulleted-list"><li style="list-style-type:circle">Just like with our subsystem class there are a couple lines of code importing the packages</li></ul><ul id="27813c98-4eca-4765-bdff-5129cacb7465" class="bulleted-list"><li style="list-style-type:disc">Again, just like our subsystem class, we want to define variables that we can use across any function defined inside of this class.<ul id="c6ae22b9-344b-4230-af3e-862c450de05b" class="bulleted-list"><li style="list-style-type:square">First we will define two variables, one for the speed that we want to drive (between 0 and 1) and one for the duration that we want to drive (number of milliseconds). Notice that the first variable is of type <code>double</code>, because we need a decimal value and the second variable is a new type <code>long</code>. The reason we use milliseconds and the <code>long</code> type is because it is easier to use with the function we use to track the time. We will cover this in the <code>initialize()</code> and <code>isFinished()</code> section.<pre id="e54f785b-65aa-4496-ac86-dfce56bb7e01" class="code"><code>private final double speed = 0.1; // 0.0 is the MIN, 1.0 is the MAX speed
+private final long duration = 3000; // number of milliseconds that we want to drive forward, 3 seconds</code></pre></li></ul><ul id="7d9bef82-335e-48c2-a8ba-a8e4da8dccdb" class="bulleted-list"><li style="list-style-type:square">We will next declare a variable that <span style="border-bottom:0.05em solid">can hold an instance</span> of our DriveTrain “Subsystem” class and we will use this class like a “black box” in our Command. We will assign an instance to it in the constructor for this class, but for now we will <span style="border-bottom:0.05em solid">just declare the variable</span>.</li></ul><ul id="34e2fe2c-7983-4432-a668-7495f1685af1" class="toggle"><li><details open=""><summary>Before we can do this, we need to import the code that we just wrote that defines what a “DriveTrain” is. I can show you how this can be done easily and automatically through VSCode, but for now this is what the line you will need to use looks like. We should place this line alongside the other lines of code that import so that we can see everything we are importing in one place.</summary><pre id="70b98b1c-f948-49a5-b92e-42586ae0fd58" class="code"><code>import frc.robot.subsystems.DriveTrain;</code></pre></details></li></ul><ul id="6060214c-bb01-4c91-935b-e33c799cd3b0" class="toggle"><li><details open=""><summary>This is our code now that our DriveTrain class is imported and our variables are declared</summary><pre id="40131b1a-8c32-4217-a31b-5d2944bb86a6" class="code"><code>// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveTrain;
+
+public class DriveForward extends CommandBase {
+  /** Creates a new DriveForward. */
+  private final double speed = 0.1; // 0.0 is the MIN, 1.0 is the MAX speed
+  private final double duration = 3.0; // number of seconds that we should drive forward
+  private final DriveTrain m_drivetrain;
+
+  public DriveForward() {
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {}
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+}</code></pre></details></li></ul></li></ul><ul id="6751be8a-37e1-4758-88ca-f9451da134a5" class="bulleted-list"><li style="list-style-type:disc">Ok, let’s define our DriveForward’s <mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid">constructor</span></mark> function <code>DriveForward()</code>.<ul id="a3aeb93f-ca14-421f-b15c-61d06489a118" class="bulleted-list"><li style="list-style-type:square">For now, all we need to provide our DriveForward() constructor with is our DriveTrain instance that our RobotContainer will provide. Remember this is so that DriveForward can check to make sure it has exclusive control of our DriveTrain instance before it starts telling it to do things. This is what our empty constructor looks like.<pre id="e9e98c4d-e598-4088-b598-79825f317b0a" class="code"><code>public DriveForward(DriveTrain drivetrain){}</code></pre></li></ul><ul id="58b0e3d9-687f-48dd-bce2-e6de226cd8d3" class="bulleted-list"><li style="list-style-type:square">What we will do in this constructor is:<ol type="1" id="801d9aa0-51a3-45cd-af42-401869ed1dea" class="numbered-list" start="1"><li>Take the DriveTrain instance passed to us by the RobotContainer and assign it to our “local” variable <code>m_drivetrain</code> so that is can be used in any of the methods in this class.<pre id="1d9775dc-9042-45aa-b7b4-1a67eaaf50bd" class="code"><code>m_drivetrain = drivetrain;</code></pre></li></ol><ol type="1" id="3482c276-afba-4378-91ea-5ba20e10140a" class="numbered-list" start="2"><li>Use the <code>addRequirements()</code> function to tell the rest of our system that this command requires exclusive control of this subsystem before it start to tell it to do things. We don’t need to know <em>how</em> this function works, we just need to provide it a subsystem and trust that it performs that function, because it says so in the documentation of the code.<p id="e49975ff-8ae1-4a7e-a394-f59897a8c791" class="">Now that we have completed the step before this one, <code>m_drivetrain</code> and <code>drivetrain</code> refer to the same “DriveTrain” <span style="border-bottom:0.05em solid">instance</span>. So the writing <code>addRequirements(drivetrain)</code> would have the same effect as writing <code>addRequirements(m_drivetrain)</code>. Just an interesting thing to note here.</p><pre id="c7e7c712-013d-4258-8139-496be8f2a1e8" class="code"><code>addRequirements(m_drivetrain)</code></pre></li></ol></li></ul><ul id="8f7609b9-960b-4e17-a344-7522cc6215a6" class="bulleted-list"><li style="list-style-type:square">This is what our finished <mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid">constructor</span></mark> looks like:<pre id="36f922a5-5acd-46c7-ae7a-9fe2d6527f8b" class="code"><code>public DriveForward(DriveTrain drivetrain) {
+	// Use addRequirements() here to declare subsystem dependencies.
+	m_drivetrain = drivetrain;
+	addRequirements(m_drivetrain);
+}</code></pre></li></ul></li></ul><ul id="a03d534b-b543-4c6b-883b-80716eeb11f3" class="bulleted-list"><li style="list-style-type:circle">We still have a few functions to fill out in this class. To better understand how these functions will be used, let’s discuss a concept known as a <em><span style="border-bottom:0.05em solid">state machine</span></em>. <ul id="bfdba69e-719a-4824-8715-71591ce35e8b" class="bulleted-list"><li style="list-style-type:square">A <span style="border-bottom:0.05em solid"><em>state machine</em></span> is an <em>abstract</em> machine that has collection of “states” that it can inhabit (one at a time) and a set of operations that can move it from one state to another. </li></ul><ul id="f5382751-a908-4d0b-bf12-cd315443fbe5" class="bulleted-list"><li style="list-style-type:circle">This might sound complicated, but can actually be quite simple, let’s assume <strong><span style="border-bottom:0.05em solid">YOU</span></strong> are a simple state machine.<ul id="adfb278d-e0dd-49fc-adee-eb68a3bb4933" class="bulleted-list"><li style="list-style-type:disc">Let’s assume you have only two “states” that you can exist in, we will call them call them “happy” and “sad”. </li></ul><ul id="b8ab82fb-4836-48b5-8214-5be6fbb0804a" class="bulleted-list"><li style="list-style-type:circle">You also have only two operations “listen to music” and “stub your toe”.<ol type="1" id="9f3c2fe7-eb6b-4dcc-bdf6-38e8ce259a80" class="numbered-list" start="1"><li>If you are in the “sad” state, the operation “listen to music” will move you to the “happy” state.</li></ol><ol type="1" id="0fbe5774-e49c-420a-9ec9-d93172416839" class="numbered-list" start="2"><li>If you are in the “happy” state, the operation “stub your toe” will move you to the “sad” state.</li></ol><ol type="1" id="7ac470bc-a825-4795-b664-18608047d881" class="numbered-list" start="3"><li>If you “listen to music” while you are in the “happy state” you will continue to be in the “happy” state</li></ol><ol type="1" id="ab9d5a7a-68d5-4072-b39f-7628dc3ea1bd" class="numbered-list" start="4"><li>If you “stub your toe” while in the sad state, you will continue to be in the “sad state”</li></ol></li></ul><ul id="0937d273-82af-4f72-bcb3-a77f7c7a9af1" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">Here is a visual diagram of the state machine we just described...</mark></li></ul></li></ul></li></ul><ul id="dd068c86-937a-4504-a21d-841669e183eb" class="bulleted-list"><li style="list-style-type:circle">This command and its functions will be used to help move our robot from state to state in a similar state machine<ul id="01080d2f-8636-48bd-9359-7d8b62b5a2ac" class="bulleted-list"><li style="list-style-type:square">The same as the machine we described before, there are a set number of states and operations</li></ul><ul id="24de1fb9-e915-48f3-b7a3-9d5b2c7f8d6b" class="bulleted-list"><li style="list-style-type:circle">States:<ul id="797fc176-4711-4d59-9535-2e398db00b5f" class="bulleted-list"><li style="list-style-type:disc">Idle</li></ul><ul id="adba0dff-f945-435a-a70b-41f42d1cef81" class="bulleted-list"><li style="list-style-type:circle">Initializing</li></ul><ul id="cc3abc96-14b4-4048-80b6-ddfdda26b337" class="bulleted-list"><li style="list-style-type:circle">Executing</li></ul><ul id="190bcb6b-6627-4a61-8977-c81edc057f7c" class="bulleted-list"><li style="list-style-type:circle">Ending</li></ul></li></ul><ul id="f2b99260-8fe0-45c1-8843-225f94dd9531" class="bulleted-list"><li style="list-style-type:circle">Operations<ul id="da03660d-37cf-46b9-99c7-1c58692440cd" class="bulleted-list"><li style="list-style-type:disc">Command is triggered</li></ul><ul id="16672714-a430-4f3a-8f8e-98066a24ce04" class="bulleted-list"><li style="list-style-type:circle"><code>IsFinished()</code> returns <code>False</code></li></ul><ul id="0aaee37d-e22f-4eee-84c8-b7c35adadd33" class="bulleted-list"><li style="list-style-type:circle"><code>IsFinished()</code> returns <code>True</code></li></ul><ul id="37bea8fe-6313-472f-aeaa-875269f9f280" class="bulleted-list"><li style="list-style-type:circle">interrupted by another triggered command</li></ul></li></ul><ul id="fc8ddd89-f8ab-4bf1-9b40-c17be986fc74" class="bulleted-list"><li style="list-style-type:circle">Here is the set of transitions<ol type="1" id="1838ec44-7137-4a32-a3c6-c9f65f196519" class="numbered-list" start="1"><li>The robot begins in the IDLE state, when it sees that a <span style="border-bottom:0.05em solid">command has been triggered</span>, it transitions from the IDLE state to the INITIALIZING state.</li></ol><ol type="1" id="b71a79c6-43e3-43fc-9ad4-cb0b6e263a98" class="numbered-list" start="2"><li>When the robot is in the INITIALIZING STATE, the <code>initialize()</code> function for the command that was triggered will be executed. Once it completes, our state machine will automatically transition to the EXECUTING state</li></ol><ol type="1" id="28d94cd7-c508-4915-8122-87061a8fad0a" class="numbered-list" start="3"><li>When the robot is in the EXECUTING state, it will run the code in <code>execute()</code>. <ol type="a" id="7998598d-b526-4d00-af5f-6ee30d5c5290" class="numbered-list" start="1"><li>When <code>isFinished()</code> returns <code>False</code> , it will continue to exist in the EXECUTING state</li></ol><ol type="a" id="faff5c62-29e8-462a-a273-65c0f868026a" class="numbered-list" start="2"><li>When <code>isFinished()</code> returns <code>True</code>, the machine will transition to the ENDING state</li></ol><ol type="a" id="b526dc95-e2f5-4fde-832c-7e3342ad1b0c" class="numbered-list" start="3"><li>If another command is triggered that needs to use the same subsystem as this command, then the machine will move to the ENDING state.</li></ol></li></ol><ol type="1" id="f4dc19f8-3b5d-45a1-9740-359ff3968275" class="numbered-list" start="4"><li>In the ENDING state, the code inside end() will run <span style="border-bottom:0.05em solid">once</span> and then the machine will automatically transition to the IDLE state</li></ol></li></ul><ul id="c602615d-0000-4ebd-8806-9030477c7348" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-red">Here is a diagram of this state machine...</mark></li></ul></li></ul><ul id="b4ff4e91-9d4c-4877-8040-956aa04909eb" class="bulleted-list"><li style="list-style-type:disc">As you might have seen, there are functions that correspond with the states in this state machine. We should write these functions with the idea of the state machine in our minds. It will also help us to write our other commands.<ul id="c7f9d7c2-9aea-4af5-8a78-bfb2fb7bf4ed" class="bulleted-list"><li style="list-style-type:square">Before we implement any functions, we will want to declare any variables in this class that we can use across all our functions. In this case all we need is a DriveTrain (which we already took care of) and a variable that can be used to keep track of the amount of time that has elapsed. For reasons that will be clear later, this value needs to be a <code>long</code> type, which is basically a big integer.<pre id="d32d6e79-6bbc-4307-afb6-6936c66c3106" class="code"><code>private long startTime;</code></pre></li></ul><ul id="023579a9-f585-4ffa-8304-68dca75cb439" class="bulleted-list"><li style="list-style-type:square"><code>initialize()</code><ul id="f7e22472-60d7-4265-869e-3f8e6f8b95f9" class="bulleted-list"><li style="list-style-type:disc">This is what we do before any of the code in <code>execute()</code> is run. In this function we will initialize our timer and we will set our motors to the speed that was provided.</li></ul><ul id="5dee6daf-4341-4adb-8d4f-78d29073c5b6" class="bulleted-list"><li style="list-style-type:square">In order to keep track of the time, we will will use a function in the “System” library: <code>System.currentTimeMillis()</code>. This function returns the number of milliseconds that have passed since January 1st, 1970. We will save the start time inside of the <code>startTime</code> variable, and then compare the current time to the <code>startTime</code> to see how much time has passed. You will see this happen in the <code>isFinished()</code> function.</li></ul></li></ul><ul id="021fb88c-9cb7-4ea6-ac8b-fdb25b42348e" class="bulleted-list"><li style="list-style-type:circle"><code>execute()</code><ul id="a696f77c-ea17-492b-8cd0-fd6e11321c29" class="bulleted-list"><li style="list-style-type:disc">this is where our main command code would be written if we needed to do anything else. For example there could be code here that checks a proximity sensor to see how close our robot is to the nearest obstacle. It should be noted that any code in this block will be run over and over by the code outside this class.</li></ul><ul id="afa47b00-fdc9-4359-8ffc-c0532a4a934b" class="bulleted-list"><li style="list-style-type:square">Since we have already turned our motors on in the <code>initialize()</code> function and we plan on turning them off in the <code>end()</code> function, there is nothing we need to do here.</li></ul></li></ul><ul id="1b1cc4b5-5cae-47ab-9084-85193285669e" class="bulleted-list"><li style="list-style-type:circle"><code>end()</code><ul id="a15caa7d-0f05-4c43-9f4f-1133c7e0cdc4" class="bulleted-list"><li style="list-style-type:disc">Before we exit this command in the state machine, we should shut off the motors.</li></ul><ul id="d9f6a7f2-34cd-44af-8a2d-efc93074fd1c" class="bulleted-list"><li style="list-style-type:disc">There is boolean value <code>interrupted</code> that is passed to this function that will be <code>true</code> if the command ended because it was interrupted. It will be <code>false</code> if it ended because of the <code>isFinished()</code> function. We can use this variable in this function if it matters why this command is ending, but in this case it does not matter. We will just stop the motors no matter what.<pre id="485a0cab-2087-43ae-b7ec-b2456cf6d4ae" class="code"><code>public void end(boolean interrupted) {
+	m_drivetrain.stop();
+}</code></pre></li></ul></li></ul><ul id="4a2c407a-9387-4494-a6be-c461abc374b9" class="bulleted-list"><li style="list-style-type:circle"><code>isFinished()</code><ul id="ae02896a-ec18-4230-804c-210b49f56eda" class="bulleted-list"><li style="list-style-type:square">Unlike the other functions in this class, this function must return a <code>boolean</code> value of <code>true</code> or <code>false</code>. This corresponds with whether the conditions have been met for the Command to be “finished”. In this case, the only thing that determines whether this command is finished is whether the amount of time that we want it to run has elapsed. We can check this by comparing the current time to the time to <code>startTime</code>. If <code>System.currentTimeMillis()</code> - <code>startTime</code> is greater than <code>duration</code>, then this Command is finished.  </li></ul></li></ul></li></ul><h3 id="2f2b0ba2-e810-4287-b049-4008080fb8bf" class="block-color-red_background">“<strong>RobotContainer” Class (continued...)</strong></h3><ul id="67f1bc14-3bab-40dd-beda-5662c5c7da51" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">talk about binding the command to a button</mark></li></ul><ul id="4ae40512-b6b0-41f5-8a29-3a437ff9975c" class="bulleted-list"><li style="list-style-type:disc">So, before we move forward, let’s review. At this point we have a...<ol type="1" id="20e2e640-90d6-4136-a6ed-44d91ce968aa" class="numbered-list" start="1"><li>Subsystem with 2 motors</li></ol><ol type="1" id="c0be5666-1e16-4161-8a20-f54f47b978fa" class="numbered-list" start="2"><li>Command that can tell a DriveTrain Subsystem to start moving forward, wait for 3 seconds, and then tell a DriveTrain Subsystem to stop</li></ol><ol type="1" id="7990a2d9-49bd-4f60-a941-1513f7c6a598" class="numbered-list" start="3"><li>RobotContainer that manages the relationship between our drivetrain and our command</li></ol></li></ul><ul id="8d794b28-9ad2-4a11-9466-9d9a7c9b2e95" class="bulleted-list"><li style="list-style-type:disc">We are very close to being done with this system, but we still need a way to “trigger” the command. What we want in this case is for a button to trigger this command to run.<ul id="9020e592-83a9-4808-b605-dc78c5b29c3f" class="bulleted-list"><li style="list-style-type:square">What we need to do is “bind” a button to our DriveForward command so that it will run when we press it. We can do this in our RobotContainer’s <code>configureButtonBindings()</code> method.</li></ul><ul id="eddfb90d-0e41-41ea-8bf1-f54ecd8b96b0" class="bulleted-list"><li style="list-style-type:circle">WPI Library has a class for controllers. the “Joystick” class can be used to access many types of controllers and their buttons/joystick values.<pre id="5a223a66-2392-4153-aad2-7d590659f085" class="code"><code>private final Joystick xbox_controller = new Joystick(0); // declare a new xbox controller with the port it is connected to</code></pre></li></ul><ul id="b72c9110-2578-4a45-ab34-95d9e0c0d071" class="bulleted-list"><li style="list-style-type:square">Now we bind the xbox controller’s “A” button to the DriveForward command. We need to know the index of the “A” button on the Xbox controller.<pre id="daab6603-fdc1-4f36-9dc2-092555ad4105" class="code"><code></code></pre></li></ul></li></ul><h3 id="d9d18c9a-43b5-49f1-af1b-5f621b5ae6f0" class="block-color-gray_background">Addendum</h3><ul id="d41086bb-6f77-4a52-9407-6fb03244bcde" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">talk again about how the Constants and the “Constants” class are useful for making cascading changes in our code. In general how a single reference point is useful. (MOVE THIS)</mark></li></ul><p id="a0288307-3211-4539-bd69-476019260ebe" class="">
+</p><h2 id="fb77546b-dcc0-4f80-90cd-13afdf0322a6" class="">Definition vs. Instance? <mark class="highlight-red">(section needs work, move it somewhere that makes more sense)</mark></h2><p id="8442190d-259d-4c1e-a460-78a646750074" class="">When we define a class, it doesn’t exist in our code yet. It is just a description of how a class works once an instance of it has been created. We have to “declare it” in code in order for it to actually be used. There can be multiple <em>instances</em> of a class that we have <em>defined</em> the same way that many <em>instances</em> of an integer or a string can exist at one time.</p><h2 id="aa70dbdd-de35-4a55-af39-1d065e49f984" class="">Deploying Our Code...</h2><p id="c7a999be-7b7d-4632-914c-85d7ea07357e" class="">
+</p></div></article></body></html>
